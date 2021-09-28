@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { EditableLayerName } from './EditableLayerName';
 import Arrow from './svg/arrow.svg';
-import Eye from './svg/eye.svg';
 import Linked from './svg/linked.svg';
 
 import { useLayer } from '../useLayer';
@@ -50,35 +49,6 @@ const Expand = styled.a<{ expanded: boolean }>`
   transform-origin: 60% center;
 `;
 
-const Hide = styled.a<{ selected: boolean; isHidden: boolean }>`
-  width: 14px;
-  height: 14px;
-  margin-right: 10px;
-  position: relative;
-  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  cursor: pointer;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: ${(props) => (props.isHidden ? 0.2 : 1)};
-  }
-  &:after {
-    content: ' ';
-    width: 2px;
-    height: ${(props) => (props.isHidden ? 100 : 0)}%;
-    position: absolute;
-    left: 2px;
-    top: 3px;
-    background: ${(props) => (props.selected ? '#fff' : '#808184')};
-    transform: rotate(-45deg);
-    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    transform-origin: 0% 0%;
-    opacity: ${(props) => (props.isHidden ? 0.4 : 1)};
-  }
-`;
-
 const TopLevelIndicator = styled.div`
   margin-left: -22px;
   margin-right: 10px;
@@ -103,7 +73,7 @@ export const DefaultLayerHeader: React.FC = () => {
     };
   });
 
-  const { hidden, actions, selected, topLevel } = useEditor((state, query) => ({
+  const { selected, topLevel } = useEditor((state, query) => ({
     hidden: state.nodes[id] && state.nodes[id].data.hidden,
     selected: state.events.selected === id,
     topLevel: query.node(id).isTopLevelCanvas(),
@@ -111,13 +81,6 @@ export const DefaultLayerHeader: React.FC = () => {
 
   return (
     <StyledDiv selected={selected} ref={drag} depth={depth}>
-      <Hide
-        selected={selected}
-        isHidden={hidden}
-        onClick={() => actions.setHidden(id, !hidden)}
-      >
-        <Eye />
-      </Hide>
       <div className="inner">
         <div ref={layerHeader}>
           {topLevel ? (
