@@ -1,5 +1,5 @@
 {
-  "name": "@craftjs/layers",
+  "name": "saltcorn-craft-layers-noeye",
   "description": "A Photoshop-like layers panel for your page editor",
   "keywords": [
     "wysiwyg",
@@ -11,7 +11,7 @@
     "web-builder",
     "react"
   ],
-  "version": "0.1.0-beta.20",
+  "version": "0.1.0-beta.22",
   "author": "Prev Wong <prevwong@gmail.com>",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
